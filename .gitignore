@@ -1,0 +1,26 @@
+# Ignoore All
+*
+
+# Configurations
+!.vscode
+!.vscode/*
+!.clasp.json
+!.gitignore
+!.prettierrc
+!eslint.config.js
+!index.html
+!package-lock.json
+!package.json
+!vite.config.js
+
+# Attachment
+!README.md
+!appsscript.json
+
+# source
+!src
+!src/**
+!mock-server
+!mock-server/**
+!gas-server
+!gas-server/**
