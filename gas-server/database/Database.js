@@ -1,4 +1,23 @@
+/**
+ * Represents a database stored in Google Sheets.
+ *
+ * Available Methods:
+ * - get(id)
+ * - getAll(ids)
+ * - contains(id)
+ * - upsert(object)
+ * - create(id, object)
+ * - createAll(object)
+ * - delete(id)
+ * - deleteAll(ids)
+ */
 class Database {
+	/**
+	 * Creates an instance of Database.
+	 * @param {string} databaseName - The name of the Google Sheets database.
+	 * @param {Function} Constructor - The constructor function defining the schema.
+	 * @throws {Error} If the constructor is not provided when creating a new sheet.
+	 */
 	constructor(databaseName, Constructor) {
 		const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
 		let sheet = spreadsheet.getSheetByName(databaseName);
@@ -19,11 +38,19 @@ class Database {
 		this.pull_();
 	}
 
+	/**
+	 * Returns the maximum chunk size for JSON data storage.
+	 * @returns {number} The chunk size limit.
+	 */
 	static CHUNK_SIZE() {
 		return 49000;
 	}
 
-	// Private Functions
+	/**
+	 * Loads data from the Google Sheet into memory.
+	 * @private
+	 * @throws {Error} If metadata cannot be read.
+	 */
 	pull_() {
 		let sheet = this.sheet_;
 		try {
@@ -69,7 +96,10 @@ class Database {
 		this.total = ids.length;
 		this.ids = ids;
 	}
-
+	/**
+	 * Stores in-memory data back to the Google Sheet.
+	 * @private
+	 */
 	push_() {
 		let sheet = this.sheet_;
 		const allData = this.allData_;
@@ -168,7 +198,11 @@ class Database {
 		}
 	}
 
-	// Public Functions
+	/**
+	 * Retrieves an entry by its ID.
+	 * @param {string} id - The unique ID of the entry.
+	 * @returns {Response} The retrieved entry or an error message.
+	 */
 	get(id) {
 		if (typeof id !== "string") {
 			return new Response(400, "Input was not a string", null);

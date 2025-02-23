@@ -24,3 +24,5 @@
 !mock-server/**
 !gas-server
 !gas-server/**
+!docs
+!docs/**
