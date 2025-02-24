@@ -1,4 +1,16 @@
-// src/services/apiClient.js
+/**
+ * src/services/apiClient.js
+ * Calls a Google Apps Script (GAS) function. If running in a GAS environment,
+ * it uses the native google.script.run API. Otherwise, it sends a request to a
+ * local mock server for development.
+ *
+ * @async
+ * @function callGasApi
+ * @param {string} functionName - The name of the GAS function to call.
+ * @param {Array<any>} [parameters=[]] - The parameters to pass to the GAS function.
+ * @returns {Promise<any>} Resolves with the response from the GAS function or mock server,
+ *                         and rejects if an error occurs.
+ */
 
 export async function callGasApi(functionName, parameters = []) {
 	return new Promise((resolve, reject) => {
